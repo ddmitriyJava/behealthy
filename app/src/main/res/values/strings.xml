@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">BeHealthy</string>
+    <string name="sign_up_text_view_text">SIGN UP</string>
+    <string name="sign_in_text_view_text">SIGN IN</string>
+    <string name="user_full_name_edit_text_hint">Введіть ПІБ</string>
+    <string name="user_email_edit_text_hint">Введіть email</string>
+    <string name="user_password_edit_text_hint">Введіть пароль</string>
+    <string name="sign_up_button_text">SIGN UP</string>
+    <string name="sign_in_button_text">SIGN IN</string>
+    <string name="greeting">ДОБРОГО ВАМ ДНЯ, </string>
+    <string name="diagnosis">Ваш поточний діагноз - </string>
+    <string name="add_new_diagnosis">Натисніть сюди, якщо поле з діагнозом порожнє</string>
+    <string name="health_indicators">ВАШІ ПОТОЧНІ ПОКАЗНИКИ</string>
+    <string name="new_health_indicator">Нові показники</string>
+    <string name="create_med_taking">Прийняття медикаменту</string>
+    <string name="create_doctor_visit">Візит до лікаря</string>
+    <string name="build_graph">Графіки</string>
+    <string name="temperature">ТЕМПЕРАТУРА</string>
+    <string name="pressure">ТИСК</string>
+    <string name="pulse">ПУЛЬС</string>
+    <string name="sugar_level">РІВЕНЬ ЦУКРУ</string>
+    <string name="indicators_list">Натисніть сюди, щоб подивитись всі показники</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="menu_text">Меню</string>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".auth.SignUpFragment">
+
+    <EditText
+        style="@style/edit_text_style"
+        android:id="@+id/user_full_name_edit_text"
+        android:hint="@string/user_full_name_edit_text_hint" />
+
+    <EditText
+        style="@style/edit_text_style"
+        android:id="@+id/user_email_edit_text"
+        android:hint="@string/user_email_edit_text_hint" />
+
+    <EditText
+        style="@style/edit_text_style"
+        android:id="@+id/user_password_edit_text"
+        android:hint="@string/user_password_edit_text_hint" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/button_style"
+        android:layout_width="300sp"
+        android:id="@+id/sign_up_button"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_button_text"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:layout_margin="10sp"
+        android:stateListAnimator="@null" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

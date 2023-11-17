@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="selected_text_view_style">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="inactive_text_view_style">
+        <item name="android:textColor">@color/hint_color</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="edit_text_style">
+        <item name="android:layout_width">300sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8sp</item>
+        <item name="android:paddingStart">15sp</item>
+        <item name="android:gravity">start</item>
+        <item name="android:layout_margin">10sp</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:background">@drawable/edit_text_style</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="button_style">
+        <item name="android:layout_width">300sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="background">@drawable/button_style</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_margin">10sp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+</resources>

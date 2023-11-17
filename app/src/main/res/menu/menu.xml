@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/create_new_health_indicator"
+        android:title="@string/new_health_indicator"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/create_new_med_taking"
+        android:title="@string/create_med_taking"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/doctor_visit"
+        android:title="@string/create_doctor_visit"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/graph"
+        android:title="@string/build_graph"
+        app:showAsAction="never" />
+</menu>
