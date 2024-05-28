@@ -1,4 +1,4 @@
-package com.example.behealthy.entities;
+package com.example.behealthy.model;
 
 import com.google.firebase.firestore.Exclude;
 import java.io.Serializable;
@@ -47,5 +47,9 @@ public class User implements Serializable {
 
     public void setHealthIndicatorsList(List<HealthIndicators> healthIndicatorsList) {
         this.healthIndicatorsList = healthIndicatorsList;
+    }
+
+    public void setDiagnosis(String diagnosis){
+        this.diagnosis = diagnosis;
     }
 }

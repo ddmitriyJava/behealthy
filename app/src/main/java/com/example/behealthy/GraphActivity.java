@@ -5,104 +5,127 @@ import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.behealthy.entities.HealthIndicators;
+import com.example.behealthy.model.HealthIndicators;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class GraphActivity extends AppCompatActivity {
-    private LineChart temperatureChart;
-    private LineChart pressureChart;
-    private LineChart pulseChart;
-    private LineChart sugarLevelChart;
+    @BindView(R.id.temperature_chart)
+    LineChart temperatureChart;
+    @BindView(R.id.pressure_chart)
+    LineChart pressureChart;
+    @BindView(R.id.pulse_chart)
+    LineChart pulseChart;
+    @BindView(R.id.sugar_level_chart)
+    LineChart sugarLevelChart;
+    private List<HealthIndicators> healthIndicatorsList;
 
     @Override
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         setContentView(R.layout.graphs);
 
-        init();
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        List<HealthIndicators> healthIndicatorsList = (List<HealthIndicators>) intent.getSerializableExtra("INDICATORS");
-        List<Double> temperatureList = healthIndicatorsList.stream().map(HealthIndicators::getTemperature).collect(Collectors.toList());
-        List<Double> pressureList = healthIndicatorsList.stream().map(HealthIndicators::getPressure).collect(Collectors.toList());
-        List<Double> pulseList = healthIndicatorsList.stream().map(HealthIndicators::getPulse).collect(Collectors.toList());
-        List<Double> sugarLevelList = healthIndicatorsList.stream().map(HealthIndicators::getSugarLevel).collect(Collectors.toList());
+        healthIndicatorsList = (List<HealthIndicators>) intent.getSerializableExtra("INDICATORS");
 
+        LineDataSet temperatureDataSet = new LineDataSet(initIndicatorEntriesAndGet("temperature"), "ТЕМПЕРАТУРА");
+        setDataSet(temperatureDataSet);
+        setChart(temperatureChart);
 
-        ArrayList<Entry> temperatureEntries = new ArrayList<>();
-        for (int i = 0; i < temperatureList.size(); i++) {
-            double value = temperatureList.get(i);
-            temperatureEntries.add(new Entry(i, (float) value));
-        }
+        LineDataSet pressureDataSet = new LineDataSet(initIndicatorEntriesAndGet("pressure"), "ТИСК");
+        setDataSet(pressureDataSet);
+        setChart(pressureChart);
 
-        ArrayList<Entry> pressureEntries = new ArrayList<>();
-        for (int i = 0; i < pressureList.size(); i++) {
-            double value = pressureList.get(i);
-            pressureEntries.add(new Entry(i, (float) value));
-        }
+        LineDataSet pulseDataSet = new LineDataSet(initIndicatorEntriesAndGet("pulse"), "ПУЛЬС");
+        setDataSet(pulseDataSet);
+        setChart(pulseChart);
 
-        ArrayList<Entry> pulseEntries = new ArrayList<>();
-        for (int i = 0; i < pulseList.size(); i++) {
-            double value = pulseList.get(i);
-            pulseEntries.add(new Entry(i, (float) value));
-        }
-
-        ArrayList<Entry> sugarLevelEntries = new ArrayList<>();
-        for (int i = 0; i < sugarLevelList.size(); i++) {
-            double value = sugarLevelList.get(i);
-            sugarLevelEntries.add(new Entry(i, (float) value));
-        }
-
-        LineDataSet temperatureDataSet = new LineDataSet(temperatureEntries, "ТЕМПЕРАТУРА");
-        temperatureDataSet.setColor(Color.BLUE);
-        temperatureDataSet.setValueTextColor(Color.BLACK);
-
-        LineDataSet pressureDataSet = new LineDataSet(pressureEntries, "ТИСК");
-        pressureDataSet.setColor(Color.BLUE);
-        pressureDataSet.setValueTextColor(Color.BLACK);
-
-        LineDataSet pulseDataSet = new LineDataSet(pulseEntries, "ПУЛЬС");
-        pulseDataSet.setColor(Color.BLUE);
-        pulseDataSet.setValueTextColor(Color.BLACK);
-
-        LineDataSet sugarLevelDataSet = new LineDataSet(sugarLevelEntries, "РІВЕНЬ ЦУКРУ");
-        sugarLevelDataSet.setColor(Color.BLUE);
-        sugarLevelDataSet.setValueTextColor(Color.BLACK);
+        LineDataSet sugarLevelDataSet = new LineDataSet(initIndicatorEntriesAndGet("sugarLevel"), "РІВЕНЬ ЦУКРУ");
+        setDataSet(sugarLevelDataSet);
+        setChart(sugarLevelChart);
 
         LineData temperatureLineData = new LineData(temperatureDataSet);
         LineData pressureLineData = new LineData(pressureDataSet);
         LineData pulseLineData = new LineData(pulseDataSet);
         LineData sugarLevelLineData = new LineData(sugarLevelDataSet);
 
+        setData(temperatureLineData, pressureLineData, pulseLineData, sugarLevelLineData);
+        invalidate();
+    }
+
+    private void setData(LineData temperatureLineData, LineData pressureLineData, LineData pulseLineData, LineData sugarLevelLineData){
         temperatureChart.setData(temperatureLineData);
         pressureChart.setData(pressureLineData);
         pulseChart.setData(pulseLineData);
         sugarLevelChart.setData(sugarLevelLineData);
+    }
 
-        // Настройте дополнительные параметры графика, например, масштабирование, подписи и т. д.
-        temperatureChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        pressureChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        pulseChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        sugarLevelChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+    private List<Number> getIndicatorList(String indicator){
+        if(Objects.equals(indicator, "temperature")){
+            return healthIndicatorsList.stream().map(HealthIndicators::getTemperature).collect(Collectors.toList());
+        } else if (Objects.equals(indicator, "pressure")) {
+            return healthIndicatorsList.stream().map(HealthIndicators::getPressure).collect(Collectors.toList());
+        } else if (Objects.equals(indicator, "pulse")) {
+            return healthIndicatorsList.stream().map(HealthIndicators::getPulse).collect(Collectors.toList());
+        } else {
+            return healthIndicatorsList.stream().map(HealthIndicators::getSugarLevel).collect(Collectors.toList());
+        }
+    }
 
-        // Обновите график
+    private List<Entry> initIndicatorEntriesAndGet(String indicator){
+        List<Number> list = getIndicatorList(indicator);
+        ArrayList<Entry> entries = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            Number value = list.get(i);
+            float floatValue = value.floatValue();
+            entries.add(new Entry(i, floatValue));
+        }
+
+        return entries;
+    }
+
+
+    private void setChart(LineChart lineChart){
+        lineChart.setExtraBottomOffset(10f);
+        lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        Legend legend = lineChart.getLegend();
+        legend.setTextColor(Color.WHITE);
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setTextColor(Color.WHITE);
+        YAxis leftYAxis = lineChart.getAxisLeft();
+        YAxis rightYAxis = lineChart.getAxisRight();
+        leftYAxis.setTextColor(Color.WHITE);
+        rightYAxis.setTextColor(Color.WHITE);
+
+        temperatureChart.invalidate();
+    }
+
+    private void setDataSet(LineDataSet lineDataSet){
+        lineDataSet.setColor(Color.WHITE);
+        lineDataSet.setValueTextColor(Color.WHITE);
+        lineDataSet.setDrawValues(true);
+    }
+
+    private void invalidate(){
         temperatureChart.invalidate();
         pressureChart.invalidate();
         pulseChart.invalidate();
         sugarLevelChart.invalidate();
-    }
-
-    private void init(){
-        temperatureChart = findViewById(R.id.temperature_chart);
-        pressureChart = findViewById(R.id.pressure_chart);
-        pulseChart = findViewById(R.id.pulse_chart);
-        sugarLevelChart = findViewById(R.id.sugar_level_chart);
     }
 }

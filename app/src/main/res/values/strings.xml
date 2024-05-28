@@ -2,14 +2,14 @@
     <string name="app_name">BeHealthy</string>
     <string name="sign_up_text_view_text">SIGN UP</string>
     <string name="sign_in_text_view_text">SIGN IN</string>
-    <string name="user_full_name_edit_text_hint">Введіть ПІБ</string>
+    <string name="user_full_name_edit_text_hint">Введіть ім\'я</string>
     <string name="user_email_edit_text_hint">Введіть email</string>
     <string name="user_password_edit_text_hint">Введіть пароль</string>
     <string name="sign_up_button_text">SIGN UP</string>
     <string name="sign_in_button_text">SIGN IN</string>
-    <string name="greeting">ДОБРОГО ВАМ ДНЯ, </string>
-    <string name="diagnosis">Ваш поточний діагноз - </string>
-    <string name="add_new_diagnosis">Натисніть сюди, якщо поле з діагнозом порожнє</string>
+    <string name="greeting">ПРИВІТ, </string>
+    <string name="diagnosis_title">Ваш поточний діагноз</string>
+    <string name="add_new_diagnosis">Діагноз</string>
     <string name="health_indicators">ВАШІ ПОТОЧНІ ПОКАЗНИКИ</string>
     <string name="new_health_indicator">Нові показники</string>
     <string name="create_med_taking">Прийняття медикаменту</string>
@@ -23,4 +23,18 @@
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="menu_text">Меню</string>
+    <string name="exit">Вийти</string>
+    <string name="be">BE</string>
+    <string name="healthy">HEALTHY</string>
+    <string name="indicators_history">Історія показників</string>
+    <string name="indicators_info">Стандартні значення показників можуть трохи змінюватись в залежності від різних факторів, таких як вік, стать, фізична активність та здоров\'я конкретної людини. Однак ось загальні діапазони стандартних значень для цих показників:
+\n\nТемпература тіла:
+\n\nНормальна температура тіла людини становить близько 36.5-37.5 градусів Цельсія (97.7-99.5 градусів за Фаренгейтом).
+\n\nАртеріальний тиск:
+\n\nТНормальний артеріальний тиск зазвичай становить близько 120 мм ртутного стовпа (мм.рт.ст.) для систолічного (верхнього показника) і близько 80 мм.рт.ст. для діастолічного (нижнього показника). Таким чином, нормальний артеріальний тиск становить близько 120/80 мм.рт.ст.
+\n\nПульс:
+\n\nНормальна частота серцевих скорочень (пульс) у дорослої людини зазвичай становить від 60 до 100 ударів на хвилину у спокої.
+\n\nРівень глюкози у крові:
+\n\nНормальний рівень глюкози в крові натще (до їжі) становить приблизно від 70 до 100 міліграм на децилітр (мг/дл). Через дві години після їжі рівень глюкози в крові може піднятися до менш ніж 140 мг/дл.
+\n\nЦі значення можуть змінюватись в залежності від віку, статі, здоров\'я та інших факторів. Важливо пам\'ятати, що якщо у вас виникають побоювання щодо ваших показників, вам слід звернутися до лікаря для більш точної оцінки та діагностики.</string>
 </resources>

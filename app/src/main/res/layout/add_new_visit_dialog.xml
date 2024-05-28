@@ -5,28 +5,28 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Введіть інформацію про візит"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:layout_marginBottom="16dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Введіть інформацію про візит"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
 
-    <EditText
-        android:id="@+id/doctor_name_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="ПІБ лікаря, направленність"
-        android:inputType="text"
-        android:layout_marginBottom="8dp"/>
+        <EditText
+            android:id="@+id/doctor_name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ПІБ лікаря, направленність"
+            android:inputType="text"
+            android:layout_marginBottom="8dp"/>
 
-    <EditText
-        android:id="@+id/date_time_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Дата та час візиту"
-        android:inputType="text"
-        android:layout_marginBottom="8dp"/>
+        <EditText
+            android:id="@+id/date_time_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Дата та час візиту"
+            android:inputType="text"
+            android:layout_marginBottom="8dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

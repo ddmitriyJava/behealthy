@@ -3,38 +3,43 @@ package com.example.behealthy.dao;
 import com.example.behealthy.dao.util.OnUserAddedListener;
 import com.example.behealthy.dao.util.OnUserAuthenticatedListener;
 import com.example.behealthy.dao.util.OnUserLoadedListener;
-import com.example.behealthy.entities.HealthIndicators;
-import com.example.behealthy.entities.User;
+import com.example.behealthy.model.HealthIndicators;
+import com.example.behealthy.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.List;
+import java.util.Objects;
 
-public class FireStoreUserDAO implements UserDAO {
+public class FirebaseUserDAO implements UserDAO {
     private CollectionReference collection;
+    private FirebaseAuth mAuth;
 
-    public FireStoreUserDAO() {
-        FireStoreDAOFactory fireStoreDAOFactory = FireStoreDAOFactory.getInstance();
-        collection = fireStoreDAOFactory.getCollection();
+    public FirebaseUserDAO() {
+        FirebaseDAOFactory firebaseDAOFactory = FirebaseDAOFactory.getInstance();
+        collection = firebaseDAOFactory.getCollection("users");
+        mAuth = firebaseDAOFactory.getDbAuth();
     }
 
     @Override
     public void addUser(User user, OnUserAddedListener onUserAddedListener) {
-        collection.add(user).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                onUserAddedListener.onUserAdded();
-            } else {
-                onUserAddedListener.onUserAddFailed();
-            }
-        });
+        mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
+                        .addOnCompleteListener(task -> {
+                            if(task.isSuccessful()){
+                                collection.add(user);
+                                onUserAddedListener.onUserAdded();
+                                } else {
+                                onUserAddedListener.onUserAddFailed();
+                            }
+                        });
     }
 
     @Override
-    public void updateUser(String userEmail, String field, Object object) {
+    public void updateUser(String field, Object object) {
         collection
-                .whereEqualTo("email", userEmail)
+                .whereEqualTo("email", Objects.requireNonNull(mAuth.getCurrentUser()).getEmail())
                 .get()
                 .addOnCompleteListener(task -> {
                     for (QueryDocumentSnapshot document : task.getResult()) {
@@ -68,17 +73,18 @@ public class FireStoreUserDAO implements UserDAO {
 
     @Override
     public void authenticateUser(String userEmail, String userPassword, OnUserAuthenticatedListener onUserAuthenticatedListener) {
-        collection
-                .whereEqualTo("email", userEmail)
-                .whereEqualTo("password", userPassword)
-                .get()
-                .addOnCompleteListener(task -> {
-                    QuerySnapshot result = task.getResult();
-                    if (result != null && !result.isEmpty()) {
-                        onUserAuthenticatedListener.onUserAuthenticated();
-                    } else {
-                        onUserAuthenticatedListener.onUserAuthenticatedFailed();
-                    }
-                });
+        mAuth.signInWithEmailAndPassword(userEmail, userPassword)
+                        .addOnCompleteListener(task -> {
+                            if(task.isSuccessful()){
+                                onUserAuthenticatedListener.onUserAuthenticated();
+                            } else {
+                                onUserAuthenticatedListener.onUserAuthenticatedFailed();
+                            }
+                        });
+    }
+
+    @Override
+    public void logOutUser() {
+        FirebaseAuth.getInstance().signOut();
     }
 }

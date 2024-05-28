@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/create_new_diagnosis"
+        android:title="@string/add_new_diagnosis"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/create_new_health_indicator"
         android:title="@string/new_health_indicator"
         app:showAsAction="never" />
@@ -21,4 +26,13 @@
         android:id="@+id/graph"
         android:title="@string/build_graph"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/show_indicators_history"
+        android:title="@string/indicators_history"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/exit"
+        android:title="@string/exit"/>
 </menu>

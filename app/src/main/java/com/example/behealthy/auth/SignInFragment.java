@@ -18,6 +18,7 @@ import com.example.behealthy.dao.util.OnUserAuthenticatedListener;
 import com.example.behealthy.util.EditTextListener;
 import com.example.behealthy.MainPageActivity;
 import com.example.behealthy.R;
+import com.example.behealthy.util.ViewManager;
 import com.google.firebase.FirebaseApp;
 
 import butterknife.BindView;
@@ -52,7 +53,7 @@ public class SignInFragment extends Fragment {
     }
 
     public void onSignInButtonClick(String userEmail, String userPassword) {
-        DAOFactory fireStoreDAOFactory = DAOFactory.getDAOFactory(DAOFactory.FIRESTOREDAOFACTORY);
+        DAOFactory fireStoreDAOFactory = DAOFactory.getDAOFactory(DAOFactory.FIREBASEDAOFACTORY);
         UserDAO fireStoreUserDAO = fireStoreDAOFactory.getUserDAO();
 
         if (isAdded()) {
@@ -71,11 +72,11 @@ public class SignInFragment extends Fragment {
     }
 
     public String getUserEmail() {
-        return userEmailEditText.getText().toString();
+        return ViewManager.getContent(userEmailEditText);
     }
 
     public String getUserPassword() {
-        return userPasswordEditText.getText().toString();
+        return ViewManager.getContent(userPasswordEditText);
     }
 
     private void moveToMainPage() {

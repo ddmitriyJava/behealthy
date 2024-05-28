@@ -6,9 +6,12 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="gray">#808080</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="hint_color">#d3d9e2</color>
-    <color name="edit_text_background_color">#5CCCCC</color>
-    <color name="button_background_color">#22da93</color>
+    <color name="light_green">#BADFDC</color>
+    <color name="start_color">#85EE96</color>
+    <color name="center_color">#8EB5D8</color>
+    <color name="end_color">#B983B1</color>
     <color name="incorrect_background_color">#FF4040</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

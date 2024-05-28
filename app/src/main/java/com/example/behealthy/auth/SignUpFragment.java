@@ -17,7 +17,8 @@ import com.example.behealthy.R;
 import com.example.behealthy.dao.DAOFactory;
 import com.example.behealthy.dao.UserDAO;
 import com.example.behealthy.dao.util.OnUserAddedListener;
-import com.example.behealthy.entities.User;
+import com.example.behealthy.model.User;
+import com.example.behealthy.util.ViewManager;
 import com.google.firebase.FirebaseApp;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class SignUpFragment extends Fragment {
     EditText userPasswordEditText;
     @BindView(R.id.sign_up_button)
     Button signUpButton;
+    private final String ERROR_MESSAGE = "Перевірте правильність вводу даних";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,18 @@ public class SignUpFragment extends Fragment {
         FirebaseApp.initializeApp(requireContext());
         ButterKnife.bind(this, fView);
 
-        signUpButton.setOnClickListener(view -> onSignUpButtonClick(userPIBEditText.getText().toString(), userEmailEditText.getText().toString(),
-                userPasswordEditText.getText().toString()));
+        signUpButton.setOnClickListener(view -> {
+            String pib = ViewManager.getContent(userPIBEditText);
+            String email = ViewManager.getContent(userEmailEditText);
+            String password = ViewManager.getContent(userPasswordEditText);
+
+            if (pib.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                handleError();
+                return;
+            }
+
+            onSignUpButtonClick(pib, email, password);
+        });
 
         return fView;
     }
@@ -56,10 +68,10 @@ public class SignUpFragment extends Fragment {
     public void onSignUpButtonClick(String userPIB, String userEmail, String userPassword) {
         User user = new User(userPIB, userEmail, userPassword, "", new ArrayList<>());
 
-        DAOFactory fireStoreDAOFactory = DAOFactory.getDAOFactory(DAOFactory.FIRESTOREDAOFACTORY);
-        UserDAO fireStoreUserDAO = fireStoreDAOFactory.getUserDAO();
+        DAOFactory fireBaseDAOFactory = DAOFactory.getDAOFactory(DAOFactory.FIREBASEDAOFACTORY);
+        UserDAO fireBaseUserDAO = fireBaseDAOFactory.getUserDAO();
 
-        fireStoreUserDAO.addUser(user, new OnUserAddedListener() {
+        fireBaseUserDAO.addUser(user, new OnUserAddedListener() {
             @Override
             public void onUserAdded() {
                 moveToMainPage(userEmail);
@@ -67,7 +79,7 @@ public class SignUpFragment extends Fragment {
 
             @Override
             public void onUserAddFailed() {
-                Toast.makeText(requireContext(), "Перевірте правильність вводу даних", Toast.LENGTH_SHORT).show();
+                handleError();
             }
         });
     }
@@ -76,5 +88,9 @@ public class SignUpFragment extends Fragment {
         Intent intent = new Intent(requireContext(), MainPageActivity.class);
         intent.putExtra("USER_EMAIL", userEmail);
         startActivity(intent);
+    }
+
+    private void handleError() {
+        Toast.makeText(requireContext(), ERROR_MESSAGE, Toast.LENGTH_SHORT).show();
     }
 }

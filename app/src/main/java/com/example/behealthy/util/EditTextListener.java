@@ -19,7 +19,7 @@ public class EditTextListener implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        editText.setBackgroundResource(R.drawable.edit_text_style);
+        editText.setBackgroundResource(R.drawable.edit_text_black_style);
 
     }
 

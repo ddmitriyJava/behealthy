@@ -15,12 +15,14 @@
     <EditText
         style="@style/edit_text_style"
         android:id="@+id/user_email_edit_text"
-        android:hint="@string/user_email_edit_text_hint" />
+        android:hint="@string/user_email_edit_text_hint"
+        android:inputType="textEmailAddress"/>
 
     <EditText
         style="@style/edit_text_style"
         android:id="@+id/user_password_edit_text"
-        android:hint="@string/user_password_edit_text_hint" />
+        android:hint="@string/user_password_edit_text_hint"
+        android:inputType="textPassword"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:background="@drawable/button_style"
